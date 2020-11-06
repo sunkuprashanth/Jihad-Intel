@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Jihad Intel</string>
+    <string name="login">Login</string>
+    <string name="login_show">Login to view more news articles</string>
+    <string name="user_id">UserId</string>
+    <string name="password">Password</string>
+    <string name="hint_user_id">example@abc.com</string>
+    <string name="hint_password">Enter your Password</string>
+    <string name="name">Name</string>
+    <string name="hint_name">Enter your name</string>
+    <string name="email_id">Email Id</string>
+    <string name="dob">Date of Birth</string>
+    <string name="hint_dob">DD/MM/YYYY</string>
+    <string name="hint_mobile">Enter your mobile no.</string>
+    <string name="mobile">Mobile No.</string>
+    <string name="hint_otp">Enter OTP</string>
+    <string name="send_otp">Get OTP</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="others">Others</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="new_register">New User ?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="submit">Submit</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="google_login">Google</string>
+    <string name="mail_id_login">E-Mail</string>
+    <string name="mobile_login">Mobile</string>
+    <string name="goto_register">
+        <u>Register Here</u>
+    </string>
+    <string name="skip_login">
+        <u>Skip Login</u>
+    </string>
+    <string name="resend_code">
+        <u>Resend code</u>
+    </string>
+
+</resources>

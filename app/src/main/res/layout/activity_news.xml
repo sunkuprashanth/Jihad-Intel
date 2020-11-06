@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.JihadIntel.NewsActivity"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/tool_bar"/>
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/margin_top_article"
+            android:paddingBottom="@dimen/margin_bottom_article">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/layout_margin"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:id="@+id/news_headline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_x_large"
+                    android:text="Lorem Ipsum has been the industry's standard dummy text ever since the 1500."
+                    android:padding="@dimen/layout_padding"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/layout_margin"
+                android:gravity="center_horizontal">
+                <TextView
+                    android:id="@+id/news_timeline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_short"
+                    android:text="2020-10-27 21:06:47,GMT+05:30"
+                    android:paddingLeft="@dimen/text_padding"
+                    android:textColor="@color/black"
+                    android:textStyle="italic"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="@dimen/layout_margin">
+                <ImageView
+                    android:id="@+id/news_img"
+                    android:src="@drawable/ic_launcher_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:padding="@dimen/layout_padding"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_margin="@dimen/layout_margin"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/news_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce porta sem eget tellus viverra aliquam. Vivamus eget erat libero. Nam maximus scelerisque ante, at euismod risus. Vivamus ullamcorper neque risus, non egestas tellus faucibus eu. Donec commodo dapibus eleifend. Proin fermentum enim vel est pharetra, et molestie nibh posuere. Nam nec orci ut leo rutrum tincidunt. Vivamus volutpat sollicitudin nisi, nec ornare lectus luctus at. Fusce quis neque neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin nec tortor et odio posuere auctor sit amet et felis. Aenean consequat ac diam eget pretium. Quisque pretium eleifend elementum. Nunc convallis varius tellus quis fermentum. Etiam sit amet risus varius, vestibulum risus non, pretium arcu.
+        Integer eleifend odio ac gravida congue. Cras condimentum dui non neque sagittis iaculis. Nam finibus purus justo, convallis consectetur nulla molestie sit amet. Mauris mi dui, euismod quis consequat a, euismod eget orci. In luctus arcu nisl, vel tempus tortor dignissim quis. Quisque vulputate tincidunt lorem, a dapibus nisi posuere id. Quisque eu iaculis turpis. Morbi scelerisque eleifend laoreet. Integer hendrerit ante sem, et dapibus ex condimentum nec. Ut lobortis libero in hendrerit blandit. In id vehicula diam, eget sagittis massa. Proin ut sem velit. In ipsum tellus, venenatis a libero at, porttitor commodo ligula. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam sodales purus tincidunt, gravida felis quis, imperdiet erat. Donec ultricies dolor vel nisi efficitur tincidunt."
+                    android:padding="@dimen/layout_padding"
+                    android:textSize="@dimen/text_size_med"/>
+
+                <LinearLayout
+                    android:id="@+id/to_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/layout_margin_small">
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1"
+                            android:background="@color/black"/>
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Login to Read More"
+                            android:gravity="center"
+                            android:layout_marginLeft="@dimen/layout_margin_small"
+                            android:layout_marginRight="@dimen/layout_margin_small"
+                            android:textColor="@color/grey"/>
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_weight="1"
+                            android:background="@color/black"/>
+                    </LinearLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:layout_margin="@dimen/layout_margin">
+
+                        <Button
+                            android:id="@+id/login"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Login"
+                            android:textColor="@color/grey"
+                            android:layout_marginTop="@dimen/layout_margin"
+                            android:paddingLeft="@dimen/layout_padding"
+                            android:paddingRight="@dimen/layout_padding"
+                            android:background="@drawable/rounded_btn_read_more"/>
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

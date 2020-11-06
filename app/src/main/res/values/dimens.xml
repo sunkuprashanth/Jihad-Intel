@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_padding">10dp</dimen>
+    <dimen name="test_form_padding">30dp</dimen>
+
+    <dimen name="text_size_short">14sp</dimen>
+    <dimen name="text_size_med">16sp</dimen>
+    <dimen name="text_size_large">18sp</dimen>
+    <dimen name="text_size_x_large">20sp</dimen>
+
+    <dimen name="image_size">140dp</dimen>
+    <dimen name="image_size_small">45dp</dimen>
+
+    <dimen name="edittext_width">180dp</dimen>
+
+    <dimen name="layout_margin_large">30dp</dimen>
+    <dimen name="layout_margin">10dp</dimen>
+    <dimen name="layout_margin_small">5dp</dimen>
+    <dimen name="layout_padding">10dp</dimen>
+    <dimen name="toolbar_padding">20dp</dimen>
+
+    <dimen name="card__border_radius">10dp</dimen>
+
+    <dimen name="margin_bottom_to_login">50dp</dimen>
+    <dimen name="margin_top_article">20dp</dimen>
+    <dimen name="margin_bottom_article">40dp</dimen>
+    <dimen name="margin_top_profile_page">50dp</dimen>
+
+    <dimen name="tool_bar_height">55dp</dimen>
+</resources>

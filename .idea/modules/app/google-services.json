@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1023574016771",
+    "firebase_url": "https://jihad-intel.firebaseio.com",
+    "project_id": "jihad-intel",
+    "storage_bucket": "jihad-intel.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023574016771:android:e8491b63c8110783da9f36",
+        "android_client_info": {
+          "package_name": "com.example.jihadintel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023574016771-1gghnnpkq7u1iup395f3vij8qolkjhi6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jihadintel",
+            "certificate_hash": "d5863bc689cfc3e9ad9a6bbc1290315a0074358c"
+          }
+        },
+        {
+          "client_id": "1023574016771-28q63j4rq6v5ntrhngd3s7kpaohr5hai.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpFpgajV2oTxqNb0iOy2pJjr39c_RdXn4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023574016771-28q63j4rq6v5ntrhngd3s7kpaohr5hai.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
