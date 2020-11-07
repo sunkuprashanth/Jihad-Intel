@@ -10,13 +10,21 @@ import android.net.wifi.WifiManager;
 import android.text.format.Formatter;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -65,6 +73,38 @@ public class GeneralMethods {
         return dateFormat.format(date);
     }
 
+    public static void getAllArticles() {
+        //Log.d(TAG, "getAllArticles: ");
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("article").limit(5)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            //Log.d(TAG, "onComplete: " + task.getResult().size());
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                Map<String,Object> article = document.getData();
+                                //Log.d(TAG, "onComplete: " + document.getId());
+
+                                NewsArticle ns = new NewsArticle();
+                                ns.setId(document.getId());
+                                ns.setTitle((String) article.get("title"));
+                                ns.setDesc((String) article.get("art_desc"));
+                                ns.setImage_url((String) article.get("img_url"));
+                                ns.setTimestamp((Timestamp) article.get("date_time"));
+
+                                GlobalData.articles.add(ns);
+                                //Log.d(TAG, "onComplete: " + ns.toString());
+                            }
+
+                        } else {
+                            Log.d(TAG, "GeneralMethods onComplete Error getting documents.", task.getException());
+                        }
+                    }
+                });
+    }
     public static void upload_gps (Location location) {
 
         dbRef = firebaseDatabase.getReference("UserGpsData/" + GlobalData.userData.getId());
@@ -148,6 +188,17 @@ public class GeneralMethods {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         GlobalData.userData = new UserDetails();
+
+        DocumentReference docRef = firebaseFirestore.collection("users").document(user.getUid());
+        Task<DocumentSnapshot> future = docRef.get();
+        while (!future.isSuccessful());
+
+        DocumentSnapshot documentSnapshot = future.getResult();
+        if (documentSnapshot.exists()) {
+            GlobalData.userData.setPhoto_url(Uri.parse((String) documentSnapshot.get("photo_url")));
+        } else {
+            Log.d(TAG, "setUserData: Not success");
+        }
 
         GlobalData.userData.setId(user.getUid());
         firebaseFirestore.collection("users")

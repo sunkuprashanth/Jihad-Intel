@@ -39,8 +39,8 @@ public class LocalLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_local_login);
 
-        userId = findViewById(R.id.user_id);
-        password = findViewById(R.id.password);
+        userId = findViewById(R.id.email_id);
+        password = findViewById(R.id.pass);
         login = findViewById(R.id.login);
         goto_register = findViewById(R.id.goto_register_link);
 
@@ -64,7 +64,6 @@ public class LocalLoginActivity extends AppCompatActivity {
                                     editor.putBoolean("FirstRun",false);
                                     editor.commit();
                                     Log.d(TAG, "onComplete: "  );
-                                    Toast.makeText(LocalLoginActivity.this, mAuth.getCurrentUser().getUid(), Toast.LENGTH_LONG).show();
 
                                     GeneralMethods.postLoginCalls(LocalLoginActivity.this);
                                     if (getIntent().getStringExtra("CalledActivity").equals("NewsActivity")) {

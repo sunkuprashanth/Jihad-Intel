@@ -81,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
         //Log.d(TAG, "onCreate: " + GlobalData.articles.size());
         if(GlobalData.articles.size()==0)
             getAllArticles();
+        else
+            show_temps();
 
         ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 200);
@@ -126,12 +128,6 @@ public class MainActivity extends AppCompatActivity {
             TextView news_headline = nb.findViewById(R.id.news_headline);
             TextView news_brief = nb.findViewById(R.id.news_brief);
             ImageView news_image = nb.findViewById(R.id.news_image);
-
-            /*
-            ImageLoader il = ImageLoader.getInstance();
-            il.init(ImageLoaderConfiguration.createDefault(MainActivity.this));
-            il.displayImage(ns.getImage_url(),news_image);
-             */
 
             Picasso.get().load(ns.getImage_url()).into(news_image);
             news_id.setText(""+i);

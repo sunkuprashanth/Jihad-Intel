@@ -137,7 +137,7 @@
             android:paddingTop="@dimen/layout_margin_small"
             android:paddingBottom="@dimen/layout_margin_small"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/login_button_border"/>
+            android:background="@drawable/layout_border"/>
         <Button
             android:id="@+id/mail_sign_in"
             android:layout_width="wrap_content"
@@ -152,7 +152,7 @@
             android:paddingTop="@dimen/layout_margin_small"
             android:paddingBottom="@dimen/layout_margin_small"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/login_button_border"/>
+            android:background="@drawable/layout_border"/>
         <Button
             android:id="@+id/google_sign_in"
             android:layout_width="wrap_content"
@@ -167,7 +167,7 @@
             android:paddingTop="@dimen/layout_margin_small"
             android:paddingBottom="@dimen/layout_margin_small"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/login_button_border"/>
+            android:background="@drawable/layout_border"/>
 
         <TextView
             android:id="@+id/skip_login"
@@ -177,28 +177,5 @@
             android:textSize="@dimen/text_size_med"
             android:textColor="@color/black"
             android:layout_marginTop="@dimen/margin_top_article"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/layout_margin"
-            android:paddingTop="@dimen/layout_padding">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/new_register"
-                android:textSize="@dimen/text_size_med"
-                android:textColor="@color/black"/>
-            <TextView
-                android:id="@+id/goto_register_link"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/goto_register"
-                android:paddingLeft="@dimen/layout_padding"
-                android:textSize="@dimen/text_size_med"
-                android:textColor="@color/blue"
-                android:clickable="true"
-                android:enabled="true"/>
-        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

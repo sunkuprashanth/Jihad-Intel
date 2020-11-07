@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.JihadIntel.MobileLoginActivity"
     android:gravity="center"
+    android:background="@drawable/gradient"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,15 +40,19 @@
             android:id="@+id/mobile_num"
             android:inputType="number"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:paddingLeft="@dimen/text_padding"
             android:layout_margin="@dimen/layout_margin_large"
+            android:background="@drawable/edit_text_background"
             android:hint="@string/hint_mobile"
             android:maxLength="10"/>
         <EditText
             android:id="@+id/otp"
             android:layout_width="@dimen/edittext_width"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/edit_text_background"
             android:layout_marginTop="@dimen/layout_margin"
+            android:paddingLeft="@dimen/text_padding"
             android:maxLength="6"
             android:hint="@string/hint_otp"
             android:visibility="gone"/>
@@ -56,6 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/send_otp"
+            android:textColor="#ffffff"
             android:background="@drawable/login_button_border"
             android:layout_marginTop="@dimen/layout_margin"/>
         <Button
@@ -63,6 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login"
+            android:textColor="#ffffff"
             android:background="@drawable/login_button_border"
             android:layout_marginTop="@dimen/layout_margin_large"
             android:visibility="gone"/>

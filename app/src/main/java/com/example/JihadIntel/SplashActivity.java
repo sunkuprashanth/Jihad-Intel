@@ -26,6 +26,7 @@ public class SplashActivity extends AppCompatActivity {
             }
         }, 2000);
 
+        GeneralMethods.getAllArticles();
         sharedPreferences = getSharedPreferences(MainActivity.prefs_file_login, MODE_PRIVATE);
         if(sharedPreferences.getBoolean("logged_in",false)) {
             GeneralMethods.postLoginCalls(this);

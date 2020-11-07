@@ -5,7 +5,7 @@
     android:id="@+id/tool_bar"
     android:layout_width="match_parent"
     android:layout_height="@dimen/tool_bar_height"
-    android:background="@drawable/gradient">
+    android:background="@drawable/gradient_toolbar">
     <LinearLayout
         android:id="@+id/profile_pic_layout"
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/login"
-                android:background="@drawable/login_button_border"
+                android:background="@drawable/layout_border"
                 android:layout_margin="@dimen/layout_margin"
                 android:visibility="visible"/>
         </LinearLayout>

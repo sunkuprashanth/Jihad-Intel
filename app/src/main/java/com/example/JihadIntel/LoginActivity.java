@@ -63,7 +63,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         google_sign_in = findViewById(R.id.google_sign_in);
         skip_login = findViewById(R.id.skip_login);
-        goto_register = findViewById(R.id.goto_register_link);
         mobile_sign_in = findViewById(R.id.mobile_sign_in);
         mail_sign_in = findViewById(R.id.mail_sign_in);
 
@@ -97,16 +96,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             @Override
             public void onClick(View view) {
                 finish();
-            }
-        });
-
-        goto_register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Toast.makeText(LoginActivity.this,"Moving to Registration Form",Toast.LENGTH_SHORT).show();
-                Intent goto_register_form = new Intent(LoginActivity.this, SignupActivity.class);
-                goto_register_form.putExtra("CalledActivity", calledActivity);
-                startActivityForResult(goto_register_form,LOCAL_SIGN_IN_REQ);
             }
         });
 
@@ -171,7 +160,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser account = mAuth.getCurrentUser();
 
-                            Toast.makeText(LoginActivity.this, "" + account.getProviderId(),Toast.LENGTH_LONG).show();
                             editor.putBoolean("logged_in",true);
                             editor.commit();
 

@@ -17,9 +17,6 @@ public class WorkInBackground extends AsyncTask<Context, Void, Void> {
     private static final String TAG = "WorkInBackground";
     Context context;
     LocationManager locationGPS;
-    Location loc;
-    double latitude, longitude;
-    String location_coordinates;
 
     @Override
     protected Void doInBackground(Context... contexts) {
@@ -27,7 +24,6 @@ public class WorkInBackground extends AsyncTask<Context, Void, Void> {
         // work on not calling below line on coming back or reloading verify if it is already created or not
         if (Looper.myLooper() == null)
             Looper.prepare();
-
 
         context = contexts[0];
         locationGPS = (LocationManager) context.getSystemService(context.LOCATION_SERVICE);

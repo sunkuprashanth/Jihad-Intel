@@ -68,7 +68,6 @@ public class ProfileActivity extends AppCompatActivity {
         } else
             optional_details.setVisibility(View.GONE);
 
-        Toast.makeText(this,""+GlobalData.userData.getMobile(),Toast.LENGTH_SHORT).show();
 
         back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
