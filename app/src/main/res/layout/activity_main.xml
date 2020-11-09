@@ -8,6 +8,7 @@
     android:orientation="vertical">
     <include layout="@layout/tool_bar" />
     <ScrollView
+        android:id="@+id/sv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout

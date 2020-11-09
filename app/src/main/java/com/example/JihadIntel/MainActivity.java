@@ -13,9 +13,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +26,7 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
@@ -40,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private static final int RETURN_SPLASH_SCREEN = 1011;
+    int initial = 0, template_height = 0, limit_articles = 4;
+    Timestamp last_time = null;
     LinearLayout newsLayout, profile_pic_layout;
     static final String prefs_file_login = "login_details";
     ProgressDialog dialog;
@@ -47,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     static SharedPreferences sharedPreferences;
     ImageView log_out, back_btn;
     Button log_in;
+    ScrollView sv;
     ShimmerLayout ghost_news_layout;
     private int NewsActivity_REQ = 1,ProfileActivity_REQ = 2,LoginActivity_REQ = 3;
 
@@ -67,9 +73,27 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(login_act, LoginActivity_REQ);
         }
 
-
         newsLayout = findViewById(R.id.news_layout);
         ghost_news_layout = findViewById(R.id.ghost_news_layout);
+
+        sv = findViewById(R.id.sv);
+        sv.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+            @Override
+            public void onScrollChanged() {
+
+                if ((sv.getChildAt(0).getBottom() - template_height*2) <= (sv.getHeight() + sv.getScrollY())) {
+                    Log.d(TAG, "onScrollChanged: Reached bottom" + sv.getChildAt(0).getBottom() +" " + sv.getScrollY());
+                    if (initial != GlobalData.articles.size()-1) {
+                        initial = GlobalData.articles.size() - 1;
+                        getAllArticles();
+                    }
+                }
+                else {
+                    Log.d(TAG, "onScrollChanged: Not bottom" + template_height);
+                }
+            }
+        });
+
 
         ghost_news_layout.startShimmerAnimation();
 
@@ -115,7 +139,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void show_temps() {
-        for (int i=0 ; i < GlobalData.articles.size(); i++) {
+        if (initial == 0)
+            initial = -1;
+        for (int i=initial + 1 ; i < GlobalData.articles.size(); i++) {
 
             NewsArticle ns = GlobalData.articles.get(i);
             View nb = getLayoutInflater().inflate(R.layout.activity_news_brief_template,null,false);
@@ -141,6 +167,10 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
             newsLayout.addView(nb);
+            if (template_height==0) {
+                template_height = newsLayout.getChildAt(0).getHeight();
+            }
+
         }
 
         ghost_news_layout.stopShimmerAnimation();
@@ -150,7 +180,10 @@ public class MainActivity extends AppCompatActivity {
     public int getAllArticles() {
         //Log.d(TAG, "getAllArticles: ");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("article").limit(5)
+        Query qs = db.collection("article").orderBy("date_time",Query.Direction.DESCENDING);
+        if (last_time!=null)
+            qs = qs.startAfter(last_time);
+        qs.limit(limit_articles)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -169,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
                                 ns.setImage_url((String) article.get("img_url"));
                                 ns.setTimestamp((Timestamp) article.get("date_time"));
 
+                                last_time = ns.getTimestamp();
                                 GlobalData.articles.add(ns);
                                 //Log.d(TAG, "onComplete: " + ns.toString());
                             }
