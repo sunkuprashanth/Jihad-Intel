@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <io.supercharge.shimmerlayout.ShimmerLayout
+        android:id="@+id/ghost_news_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:shimmer_animation_duration="400"
+        app:shimmer_mask_width="1">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/card__border_radius"
+            android:layout_margin="@dimen/layout_margin"
+            android:saveEnabled="true"
+            android:clickable="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_margin"
+                android:layout_margin="@dimen/layout_padding"
+                android:orientation="vertical"
+                android:background="@drawable/layout_border">
+                <ImageView
+                    android:id="@+id/news_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
+                    android:background="@color/light_grey"
+                    android:layout_margin="@dimen/layout_margin_small"
+                    android:paddingLeft="@dimen/layout_padding"
+                    android:paddingRight="@dimen/layout_padding"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_weight="3"
+                    android:background="@color/light_grey"
+                    android:padding="@dimen/text_padding"
+                    android:layout_margin="@dimen/layout_margin" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:background="@color/light_grey"
+                    android:layout_weight="5"
+                    android:layout_margin="@dimen/layout_margin"
+                    android:padding="@dimen/text_padding" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </io.supercharge.shimmerlayout.ShimmerLayout>
+
+</LinearLayout>

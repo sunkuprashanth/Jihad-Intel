@@ -16,7 +16,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name="com.example.JihadIntel.SplashActivity"/>
+        <activity android:name="com.example.JihadIntel.SplashActivity"
+            android:configChanges="orientation|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name="com.example.JihadIntel.GetUserDetailsActivity" />
         <activity android:name="com.example.JihadIntel.MobileLoginActivity" />
         <activity android:name="com.example.JihadIntel.LocalLoginActivity" />
@@ -39,11 +45,6 @@
             android:name="com.example.JihadIntel.MainActivity"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTask">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

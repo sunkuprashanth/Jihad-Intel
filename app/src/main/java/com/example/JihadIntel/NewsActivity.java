@@ -80,11 +80,6 @@ public class NewsActivity extends AppCompatActivity {
             to_login.setVisibility(View.GONE);
         }
     }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        toolBarActions();
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

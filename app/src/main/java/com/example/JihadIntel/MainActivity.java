@@ -18,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.JihadIntel.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
@@ -33,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.supercharge.shimmerlayout.ShimmerLayout;
 
 import static com.example.JihadIntel.GeneralMethods.postLoginCalls;
 
@@ -47,23 +47,19 @@ public class MainActivity extends AppCompatActivity {
     static SharedPreferences sharedPreferences;
     ImageView log_out, back_btn;
     Button log_in;
+    ShimmerLayout ghost_news_layout;
     private int NewsActivity_REQ = 1,ProfileActivity_REQ = 2,LoginActivity_REQ = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedPreferences = getSharedPreferences(prefs_file_login, MODE_PRIVATE);
-
-        if (GeneralMethods.start == 0) {
-            Intent intent = new Intent(MainActivity.this, SplashActivity.class);
-            startActivityForResult(intent,1011);
-            GeneralMethods.start = 1;
-        }
         setContentView(R.layout.activity_main);
 
-    }
-
-    public void setLayout() {
+        sharedPreferences = getSharedPreferences(prefs_file_login, MODE_PRIVATE);
+        if(sharedPreferences.getBoolean("logged_in",false)) {
+            GeneralMethods.postLoginCalls(this);
+            toolBarActions();
+        }
         if (sharedPreferences.getBoolean("FirstRun",true)) {
             GeneralMethods.start=1;
             Intent login_act = new Intent(MainActivity.this, LoginActivity.class);
@@ -71,12 +67,11 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(login_act, LoginActivity_REQ);
         }
 
-        newsLayout = findViewById(R.id.news_layout);
 
-        dialog = new ProgressDialog(MainActivity.this);
-        dialog.setTitle("Loading");
-        dialog.setMessage("Please wait while loading");
-        dialog.show();
+        newsLayout = findViewById(R.id.news_layout);
+        ghost_news_layout = findViewById(R.id.ghost_news_layout);
+
+        ghost_news_layout.startShimmerAnimation();
 
         //Log.d(TAG, "onCreate: " + GlobalData.articles.size());
         if(GlobalData.articles.size()==0)
@@ -95,12 +90,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        toolBarActions();
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RETURN_SPLASH_SCREEN) {
-            setLayout();
-        }
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("FirstRun",false);
@@ -145,16 +142,10 @@ public class MainActivity extends AppCompatActivity {
             });
             newsLayout.addView(nb);
         }
-        dialog.dismiss();
+
+        ghost_news_layout.stopShimmerAnimation();
+        ghost_news_layout.setVisibility(View.GONE);
     }
-
-    public void demo() {
-        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
-        Task<DocumentSnapshot> dp = firebaseFirestore.collection("users").document(FirebaseAuth.getInstance().getUid()).get();
-        Picasso.get().load(dp.getResult().get("photo_url").toString()).into(profile);
-
-    }
-
 
     public int getAllArticles() {
         //Log.d(TAG, "getAllArticles: ");
@@ -189,12 +180,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         return 1;
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        toolBarActions();
     }
 
     public void toolBarActions () {
@@ -234,25 +219,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(profile_page,ProfileActivity_REQ);
             }
         });
-        //demo();
-
-        //log_out = findViewById(R.id.log_out);
-        /*
-        log_out.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                mAuth.signOut();
-                Log.d(TAG, "onClick: " + mAuth.getCurrentUser());
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.clear();
-                editor.putBoolean("is_logged", false);
-                editor.commit();
-                GlobalData.userData = new UserLocalAccount();
-                profile.setImageResource(R.mipmap.profile_pic);
-            }
-        });
-         */
     }
 
     @Override

@@ -194,11 +194,10 @@ public class GeneralMethods {
         while (!future.isSuccessful());
 
         DocumentSnapshot documentSnapshot = future.getResult();
-        if (documentSnapshot.exists()) {
+        if (documentSnapshot.exists())
             GlobalData.userData.setPhoto_url(Uri.parse((String) documentSnapshot.get("photo_url")));
-        } else {
+        else
             Log.d(TAG, "setUserData: Not success");
-        }
 
         GlobalData.userData.setId(user.getUid());
         firebaseFirestore.collection("users")

@@ -7,6 +7,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static com.example.JihadIntel.MainActivity.prefs_file_login;
+
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -17,7 +22,8 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        new Handler().postDelayed(new Runnable(){
+        Timer timer=new Timer();
+        timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 Intent intent = new Intent(SplashActivity.this, MainActivity.class);
@@ -26,10 +32,5 @@ public class SplashActivity extends AppCompatActivity {
             }
         }, 2000);
 
-        GeneralMethods.getAllArticles();
-        sharedPreferences = getSharedPreferences(MainActivity.prefs_file_login, MODE_PRIVATE);
-        if(sharedPreferences.getBoolean("logged_in",false)) {
-            GeneralMethods.postLoginCalls(this);
-        }
     }
 }
