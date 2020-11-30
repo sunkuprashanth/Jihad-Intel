@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -15,12 +16,14 @@ import static com.example.JihadIntel.MainActivity.prefs_file_login;
 
 public class SplashActivity extends AppCompatActivity {
 
-    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        GlobalData.articles = new ArrayList<NewsArticle>();
+        GeneralMethods.getAllArticles();
 
         Timer timer=new Timer();
         timer.schedule(new TimerTask() {
@@ -28,7 +31,6 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(intent);
-                SplashActivity.this.finish();
             }
         }, 2000);
 

@@ -23,6 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -41,9 +42,10 @@ import static android.content.Context.WIFI_SERVICE;
 
 public class GeneralMethods {
 
-    static  int start = 0;
+    static  int start = 0, limit_articles = 4;;
     static int RESULT_SIGN_OUT = -2, RESULT_SIGN_IN = 2, req_code = 111, LOCAL_SIGN_IN_REQ = 112, GET_DETAILS_REQ = 211, GET_DETAILS_RES = 212;
     static String TAG = "GeneralMethods";
+    static Timestamp last_time = null;
     static int fetched_sync = 0;
     static FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     static FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
@@ -76,7 +78,8 @@ public class GeneralMethods {
     public static void getAllArticles() {
         //Log.d(TAG, "getAllArticles: ");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("article").limit(5)
+        Query qs = db.collection("article").orderBy("date_time",Query.Direction.DESCENDING);
+        qs.limit(limit_articles)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -95,6 +98,7 @@ public class GeneralMethods {
                                 ns.setImage_url((String) article.get("img_url"));
                                 ns.setTimestamp((Timestamp) article.get("date_time"));
 
+                                last_time = ns.getTimestamp();
                                 GlobalData.articles.add(ns);
                                 //Log.d(TAG, "onComplete: " + ns.toString());
                             }

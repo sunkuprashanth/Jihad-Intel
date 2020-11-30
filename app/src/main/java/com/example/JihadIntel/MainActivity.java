@@ -37,13 +37,14 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.supercharge.shimmerlayout.ShimmerLayout;
 
+import static com.example.JihadIntel.GeneralMethods.limit_articles;
 import static com.example.JihadIntel.GeneralMethods.postLoginCalls;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
     private static final int RETURN_SPLASH_SCREEN = 1011;
-    int initial = 0, template_height = 0, limit_articles = 4;
+    int initial = 0, template_height = 0;
     Timestamp last_time = null;
     LinearLayout newsLayout, profile_pic_layout;
     static final String prefs_file_login = "login_details";
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
         newsLayout = findViewById(R.id.news_layout);
         ghost_news_layout = findViewById(R.id.ghost_news_layout);
+        ghost_news_layout.startShimmerAnimation();
 
         sv = findViewById(R.id.sv);
         sv.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
@@ -94,9 +96,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        ghost_news_layout.startShimmerAnimation();
-
         //Log.d(TAG, "onCreate: " + GlobalData.articles.size());
         if(GlobalData.articles.size()==0)
             getAllArticles();
@@ -110,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
             postLoginCalls(this);
         }
         toolBarActions();
-
     }
 
     @Override
@@ -171,16 +169,18 @@ public class MainActivity extends AppCompatActivity {
                 template_height = newsLayout.getChildAt(0).getHeight();
             }
 
-        }
+            ghost_news_layout.stopShimmerAnimation();
+            ghost_news_layout.setVisibility(View.GONE);
 
-        ghost_news_layout.stopShimmerAnimation();
-        ghost_news_layout.setVisibility(View.GONE);
+        }
     }
 
     public int getAllArticles() {
         //Log.d(TAG, "getAllArticles: ");
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         Query qs = db.collection("article").orderBy("date_time",Query.Direction.DESCENDING);
+        if (last_time==null)
+            last_time = GeneralMethods.last_time;
         if (last_time!=null)
             qs = qs.startAfter(last_time);
         qs.limit(limit_articles)
@@ -255,9 +255,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        GlobalData.articles = new ArrayList<NewsArticle>();
-        super.onBackPressed();
-    }
 }

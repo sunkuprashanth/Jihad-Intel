@@ -7,6 +7,7 @@
     <dimen name="text_size_med">16sp</dimen>
     <dimen name="text_size_large">18sp</dimen>
     <dimen name="text_size_x_large">20sp</dimen>
+    <dimen name="Label_text_size">25sp</dimen>
 
     <dimen name="image_size">140dp</dimen>
     <dimen name="image_size_small">45dp</dimen>
